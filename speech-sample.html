@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+  // ‚±‚±‚Éˆ—‚ð‹Lq‚µ‚Ü‚·
+	document.getElementById("Speech").addEventListener("click", speechText);
+	document.getElementById("Recognition").addEventListener("click", recogniteVoice);
+});
+//-->
+</script>
+
+<script>
+function speechText() {
+	var synthes = new SpeechSynthesisUtterance();
+	synthes.voiceURI = 1;
+	synthes.volume = 1;
+	synthes.rate = 1;
+	synthes.pitch = 1;
+	synthes.text = $('input').val();
+	synthes.lang = 'en-US';
+	speechSynthesis.speak(synthes);
+}
+function recogniteVoice() {
+	window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+	var recognition = new webkitSpeechRecognition();
+	recognition.lang = 'ja';
+	recognition.addEventListener('result', function(event){
+	    var text = event.results.item(0).item(0).transcript;
+	    alert(text);
+	}, false);
+	recognition.start();
+}
+</script>
+</head>
+<body>
+
+<h1>Speech Text</h1>
+<div id="output">output area</div>
+<br>
+<form id="inputForm">
+  <input type="text" id="input" value="This is text." />
+<button type="button" id="Speech">SPEECH</button><br>
+</form>
+
+<button type="button" id="Recognition">RECOGNITION</button><br>
+
+</body>
+</html> 
